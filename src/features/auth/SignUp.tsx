@@ -20,14 +20,13 @@ const SignupModal: React.FC<SignupModalProps> = ({ visible, onClose }) => {
             const res = await axios.post('https://financial-dashboard-z0nq.onrender.com/api/auth/signup', values);
             message.success(res.data.message);
 
-            // Optional: Log them in directly after signup
             const loginRes = await axios.post('https://financial-dashboard-z0nq.onrender.com/api/auth/login', {
                 email: values.email,
                 password: values.password,
             });
             localStorage.setItem('token', loginRes.data.token);
 
-            navigate('/dashboard'); // 👈 Redirect to dashboard
+            navigate('/dashboard');
             onClose();
         } catch (err: any) {
             message.error(err.response?.data?.message || 'Signup failed');
